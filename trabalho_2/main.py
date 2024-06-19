@@ -1,7 +1,7 @@
 import csv
 import pprint
 from datetime import datetime
-from validacoes.vaidacoes import valida_int, valida_mes, validar_inteiro_no_intervalo
+from validacoes.validacoes import valida_int, valida_mes, validar_inteiro_no_intervalo
 from inputs.inputs import (
     apresentacao_dados,
     procurar_data_final,
@@ -205,47 +205,49 @@ def formatar_data_pre_apresentacao(range_filtrado_por_data_e_tipo):
 
     return lista
 
+
 def preenchimento(campo, valor):
     n_campo = len(campo)
     n_valor = len(valor)
     return n_campo - n_valor
 
+
 def apresentacar_data_filtrados_data_tipo(dados_prontos_para_apresentacao):
-    import pdb
-    #pdb.set_trace()
-    """ 
-    "Precipitação (mm)"- 17
-    "Máxima (°C)" - 11
-    "Mínima (°C)" - 11
-    Horas de Insolação" - 18
-    "Temperatura Média (°C) - 22
-    Umidade Relativa (%) - 20
-    "Velocidade do Vento (km/h)" - 26
-
-
-
-    """
-    cabecalho = ["Data               ", "Precipitação (mm)", "Máxima (°C)", "Mínima (°C)", 
-    "Horas de Insolação", "Temperatura Média (°C)", 
-    "Umidade Relativa (%)", "Velocidade do Vento (km/h)"]
+    cabecalho = [
+        "Data               ",
+        "Precipitação (mm)",
+        "Máxima (°C)",
+        "Mínima (°C)",
+        "Horas de Insolação",
+        "Temperatura Média (°C)",
+        "Umidade Relativa (%)",
+        "Velocidade do Vento (km/h)",
+    ]
+    print("-" * 165)
     print(" | ".join(cabecalho))
-    print("-" * 80)
+    print("-" * 165)
     for dado in dados_prontos_para_apresentacao:
         linha = [
             dado["data"],
-            str(dado["precip"]) + " " * preenchimento(cabecalho[1], str(dado["precip"])),
-            str(dado["maxima"]) + " " * preenchimento(cabecalho[2], str(dado["maxima"])),
-            str(dado["minima"]) + " " * preenchimento(cabecalho[3], str(dado["minima"])),
-            str(dado["horas_insol"]) + " " * preenchimento(cabecalho[4], str(dado["horas_insol"])),
-            str(dado["temp_media"]) + " " * preenchimento(cabecalho[5], str(dado["temp_media"])),
-            str(dado["um_relativa"]) + " " * preenchimento(cabecalho[6], str(dado["um_relativa"])),
-            str(dado["vel_vento"]) + " " * preenchimento(cabecalho[7], str(dado["vel_vento"])),
+            str(dado["precip"])
+            + " " * preenchimento(cabecalho[1], str(dado["precip"])),
+            str(dado["maxima"])
+            + " " * preenchimento(cabecalho[2], str(dado["maxima"])),
+            str(dado["minima"])
+            + " " * preenchimento(cabecalho[3], str(dado["minima"])),
+            str(dado["horas_insol"])
+            + " " * preenchimento(cabecalho[4], str(dado["horas_insol"])),
+            str(dado["temp_media"])
+            + " " * preenchimento(cabecalho[5], str(dado["temp_media"])),
+            str(dado["um_relativa"])
+            + " " * preenchimento(cabecalho[6], str(dado["um_relativa"])),
+            str(dado["vel_vento"])
+            + " " * preenchimento(cabecalho[7], str(dado["vel_vento"])),
         ]
         print(" | ".join(linha))
+    print("-" * 165)
     print(" | ".join(cabecalho))
-    print("-" * 80)
-
-
+    print("-" * 165)
 
 
 def converter_mes_legivel(resposta):
@@ -294,19 +296,18 @@ dados_prontos_para_apresentacao = formatar_data_pre_apresentacao(
 )
 apresentacar_data_filtrados_data_tipo(dados_prontos_para_apresentacao)
 
-cmc = filtrar_base_chuvoso(base) 
+cmc = filtrar_base_chuvoso(base)
 
-#print(soma_mes("2_1995", base))
+# print(soma_mes("2_1995", base))
 
 resposta = max(somar_chuva_mes_ano(cmc), key=lambda x: x[1])
 mes_ano_legivel = converter_mes_legivel(resposta=resposta)
-print('')
-print('')
-print('')
+print("")
+print("")
+print("")
 print(
     f"O mes mais chuvoso  de todos os tempos for o mes {mes_ano_legivel["mes"]} do ano de {mes_ano_legivel["ano"]}"
 )
-print('')
-print('')
-print('')
-
+print("")
+print("")
+print("")

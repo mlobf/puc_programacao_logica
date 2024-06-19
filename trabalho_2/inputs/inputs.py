@@ -1,5 +1,11 @@
 from datetime import datetime
-from validacoes.vaidacoes import validar_inteiro_no_intervalo
+from validacoes.validacoes import validar_inteiro_no_intervalo
+
+"""
+    Adicionar a validacao de forma, caso o usuario digite um valor incorreto,
+    que seja identificado o erro e que ele seja direcionado a redigitar o valor
+    novamente
+"""
 
 
 def apresentacao_dados() -> int:
@@ -16,12 +22,12 @@ def apresentacao_dados() -> int:
 
 
 def procurar_data_final():
+    """
     mes = input("Informe o mês da data final ")
     ano = input("Informe o ano da data final ")
     """
     mes = 12
     ano = 2020
-    """
     if validar_inteiro_no_intervalo(mes, 1, 12) and validar_inteiro_no_intervalo(
         ano, 1500, 2024
     ):
@@ -31,15 +37,20 @@ def procurar_data_final():
 
 
 def procurar_data_inicial():
-    """
     mes = 12
     ano = 1997
     """
     mes = input("Informe o mês da data inicial ")
-    ano = input("Informe o ano da data inicial")
+    ano = input("Informe o ano da data inicial ")
+    """
     if validar_inteiro_no_intervalo(mes, 1, 12) and validar_inteiro_no_intervalo(
         ano, 1500, 2024
     ):
         data = datetime(int(ano), int(mes), 1)
         data_inicial = data
         return data_inicial
+
+
+# Teste
+
+procurar_data_inicial()
