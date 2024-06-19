@@ -209,6 +209,18 @@ def formatar_data_pre_apresentacao(range_filtrado_por_data_e_tipo):
 def apresentacar_data_filtrados_data_tipo(dados_prontos_para_apresentacao):
     import pdb
     #pdb.set_trace()
+    """ 
+    "Precipitação (mm)" 17
+    "Máxima (°C)" 11
+    "Mínima (°C)" 11
+    Horas de Insolação" 18
+    "Temperatura Média (°C) 22
+    Umidade Relativa (%) 20
+    "Velocidade do Vento (km/h)" 26
+
+
+
+    """
     cabecalho = ["Data               ", "Precipitação (mm)", "Máxima (°C)", "Mínima (°C)", 
     "Horas de Insolação", "Temperatura Média (°C)", 
     "Umidade Relativa (%)", "Velocidade do Vento (km/h)"]
