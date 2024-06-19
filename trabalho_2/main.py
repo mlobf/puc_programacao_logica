@@ -205,18 +205,22 @@ def formatar_data_pre_apresentacao(range_filtrado_por_data_e_tipo):
 
     return lista
 
+def preenchimento(campo, valor):
+    n_campo = len(campo)
+    n_valor = len(valor)
+    return n_campo - n_valor
 
 def apresentacar_data_filtrados_data_tipo(dados_prontos_para_apresentacao):
     import pdb
     #pdb.set_trace()
     """ 
-    "Precipitação (mm)" 17
-    "Máxima (°C)" 11
-    "Mínima (°C)" 11
-    Horas de Insolação" 18
-    "Temperatura Média (°C) 22
-    Umidade Relativa (%) 20
-    "Velocidade do Vento (km/h)" 26
+    "Precipitação (mm)"- 17
+    "Máxima (°C)" - 11
+    "Mínima (°C)" - 11
+    Horas de Insolação" - 18
+    "Temperatura Média (°C) - 22
+    Umidade Relativa (%) - 20
+    "Velocidade do Vento (km/h)" - 26
 
 
 
@@ -229,13 +233,13 @@ def apresentacar_data_filtrados_data_tipo(dados_prontos_para_apresentacao):
     for dado in dados_prontos_para_apresentacao:
         linha = [
             dado["data"],
-            str(dado["precip"]),
-            str(dado["maxima"]),
-            str(dado["minima"]),
-            str(dado["horas_insol"]),
-            str(dado["temp_media"]),
-            str(dado["um_relativa"]),
-            str(dado["vel_vento"]),
+            str(dado["precip"]) + " " * preenchimento(cabecalho[1], str(dado["precip"])),
+            str(dado["maxima"]) + " " * preenchimento(cabecalho[2], str(dado["maxima"])),
+            str(dado["minima"]) + " " * preenchimento(cabecalho[3], str(dado["minima"])),
+            str(dado["horas_insol"]) + " " * preenchimento(cabecalho[4], str(dado["horas_insol"])),
+            str(dado["temp_media"]) + " " * preenchimento(cabecalho[5], str(dado["temp_media"])),
+            str(dado["um_relativa"]) + " " * preenchimento(cabecalho[6], str(dado["um_relativa"])),
+            str(dado["vel_vento"]) + " " * preenchimento(cabecalho[7], str(dado["vel_vento"])),
         ]
         print(" | ".join(linha))
     print(" | ".join(cabecalho))
