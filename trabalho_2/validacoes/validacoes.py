@@ -21,20 +21,3 @@ def valida_int(elemento: int) -> bool:
         return True
     else:
         return False
-
-
-def validar_inteiro_no_intervalo(valor, min_valor, max_valor):
-    """
-    • Valide os dados de entrada;
-    """
-    try:
-        # Tenta converter o valor para inteiro
-        int_valor = int(valor)
-        # Verifica se o valor está dentro do intervalo especificado
-        if min_valor <= int_valor <= max_valor:
-            return True
-        else:
-            return False
-    except ValueError:
-        # Se ocorrer um ValueError, o valor não é um número inteiro
-        return False

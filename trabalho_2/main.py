@@ -1,13 +1,12 @@
 import csv
 import pprint
 from datetime import datetime
-from validacoes.validacoes import valida_int, valida_mes, validar_inteiro_no_intervalo
 from inputs.inputs import (
     apresentacao_dados,
     procurar_data_final,
     procurar_data_inicial,
-    validar_inteiro_no_intervalo,
 )
+from calculo.aux import *
 
 
 def carregar_csv(path):
@@ -285,12 +284,16 @@ path = "Anexo_Arquivo_Dados_Projeto_Logica_e_programacao_de_computadores.csv"
 base = carregar_csv(path=path)
 
 di = procurar_data_inicial()
-df = procurar_data_final()
+df = procurar_data_final(di)
+
 range_filtrado_por_data = filtrar_range_data(di, df, base)
+
 ad = apresentacao_dados()
+
 range_filtrado_por_data_e_tipo = filtrar_range_tipo(
     tipo_de_busca=ad, base_filtrada_por_data=range_filtrado_por_data
 )
+
 dados_prontos_para_apresentacao = formatar_data_pre_apresentacao(
     range_filtrado_por_data_e_tipo
 )
@@ -311,3 +314,7 @@ print(
 print("")
 print("")
 print("")
+
+base_minima = filtrar_base_temp_minima(base) 
+base_minima_onze = filtrar_ultimos_onze_ano(base_minima)
+
