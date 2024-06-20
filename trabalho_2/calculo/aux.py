@@ -22,24 +22,29 @@ def filtrar_base_temp_minima(base):
 
 
 def filtrar_ultimos_onze_ano(base_minima):
+    """Estou alterando pois a base de dados nao possui registros atuais \n
+    desta forma, nao posso realizar o calculo de forma dinamica.
+    2006 a 2016.
+    """
     lista = []
     data_atual = datetime.now()
     data_anterior = data_atual - relativedelta(years=11)
     for x in base_minima:
-        import pdb
-
-        # pdb.set_trace()
-        if x.get("data").year >= data_anterior.year:
+        # if x.get("data").year >= data_anterior.year:
+        if int(x.get("data").year) >= 2006 and int(x.get("data").year) <= 2016:
             lista.append(x)
     return lista
 
 
-def filtar_ultimos_onze_anos_mes(base_filtrada, mes_informado):
+def filtrar_ultimos_onze_anos_mes(base_filtrada: list, mes_informado: int) -> list:
     """Pega a base convertida contendo os ultimos 11 anos e separa somente\n
     o mes informado pelo usuario por todo periodo abrangido
     """
+    import pdb
+
+    # pdb.set_trace()
     lista = []
     for x in base_filtrada:
-        if x.get("data").month == mes_informado:
+        if int(x.get("data").month) == int(mes_informado):
             lista.append(x)
     return lista

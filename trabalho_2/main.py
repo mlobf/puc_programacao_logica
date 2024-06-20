@@ -5,6 +5,7 @@ from inputs.inputs import (
     apresentacao_dados,
     procurar_data_final,
     procurar_data_inicial,
+    escolher_mes
 )
 from calculo.aux import *
 
@@ -102,7 +103,6 @@ def format_mes_ano(x):
 def criar_lista_mes_ano(lista):
     lista_mes_ano = []
     for x in lista:
-        # print(datetime.strptime(str(x.get("data")), "%d/%m/%Y"))
         mes = x.get("data").month
         ano = x.get("data").year
         mes_ano = str(mes) + "_" + str(ano)
@@ -112,14 +112,14 @@ def criar_lista_mes_ano(lista):
     return sorted(list(set(lista_mes_ano)))
 
 
-def soma_mes(mes_ano, cmc):
+def soma_mes(mes_ano, cmc,key:str):
     # Funciona liso
     import pdb
 
     acumulado = []
     for x in cmc:
         if mes_ano == format_mes_ano(x["data"]):
-            acumulado.append(float(x.get("precip")))
+            acumulado.append(float(x.get(key)))
     return (mes_ano, sum(acumulado))
 
 
@@ -129,7 +129,7 @@ def somar_chuva_mes_ano(cmc):
     lista_mes_ano = criar_lista_mes_ano(cmc)
     lista_acumulado = []
     for x in lista_mes_ano:
-        sm = soma_mes(x, cmc)
+        sm = soma_mes(x, cmc,"precip")
         lista_acumulado.append(sm)
 
     return lista_acumulado
@@ -317,4 +317,6 @@ print("")
 
 base_minima = filtrar_base_temp_minima(base) 
 base_minima_onze = filtrar_ultimos_onze_ano(base_minima)
-
+mes_informado = escolher_mes() 
+ultimos_onze = filtrar_ultimos_onze_anos_mes(base_minima_onze, mes_informado=mes_informado)
+lista_com_mes_ano = criar_lista_mes_ano(ultimos_onze)
