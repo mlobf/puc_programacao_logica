@@ -119,3 +119,7 @@ def procurar_data_final(data_inicial: datetime) -> datetime:
                 print("A data final deve ser maior que a data inicial")
         except Exception as e:
             print(f"Infelizmente ocorreu um erro do tipo => {e} . Tente novamente")
+def enviar_resposta_mes_mais_chuvoso(mes_ano_legivel):
+    return print(
+        f"O mes mais chuvoso  de todos os tempos for o mes {mes_ano_legivel["mes"]} do ano de {mes_ano_legivel["ano"]}"
+    )

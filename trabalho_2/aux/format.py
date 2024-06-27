@@ -80,6 +80,7 @@ def format_mes_ano(x):
 
 
 def criar_lista_mes_ano(lista):
+    """ """
     lista_mes_ano = []
     for x in lista:
         mes = x.get("data").month
