@@ -1,4 +1,5 @@
 import pprint
+from .testes import grafico_barra
 from datetime import datetime
 from aux.load import carregar_csv
 from aux.filters import (
@@ -54,9 +55,6 @@ if __name__ == "__main__":
         base_minima_onze, mes_informado=mes_informado
     )
     lista_com_mes_ano = criar_lista_mes_ano(ultimos_onze)
-    print("lista com mes ano =>", lista_com_mes_ano)
-
-    print("lista com os ultimos onze anos", ultimos_onze)
 
     """ achar a media da temperatura minima dos ultimas 11 anos do mes escolhido pelo usuario"""
 
@@ -87,23 +85,24 @@ if __name__ == "__main__":
 
         return lista
 
-    def apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze) -> None:
+    def apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze) -> list:
+        lista_medias = []
         for x in achar_media_temp_minima_ano(lista_com_mes_ano, ultimos_onze):
-            print("----")
-            print("----")
-            print("----")
-            print(x.get("data"))
-            print("len - > ", len(x.get("valores")))
-            print("len - type > ", type(len(x.get("valores"))))
-            print("valores =>", x.get("valores"))
-            print("valores => type", type(x.get("valores")))
-            print("----")
-            print("soma", sum(x.get("valores")))
-            print("soma type", type(sum(x.get("valores"))))
-            print("media", sum(x.get("valores")) / len(x.get("valores")))
-            print("----")
-            print("----")
-            print("----")
+            dict_medias = {
+                "data": x.get("data"),
+                "len": len(x.get("valores")),
+                "soma": sum(x.get("valores")),
+                "media": float(sum(x.get("valores")) / len(x.get("valores"))),
+            }
+
+            lista_medias.append(dict_medias)
+
+        return lista_medias
 
 
-apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze)
+pprint.pprint(apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze))
+
+
+""" Criar uma apresentacao correta com os dados do topico C.
+    Criar um grafico que entregue dos dados conforme o enunciado.
+"""
