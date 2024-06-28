@@ -1,4 +1,6 @@
 from datetime import datetime
+from aux.calc import achar_media_temp_minima_ano
+#from aux.calc import apresentacao_dados_media_minima
 
 # from validacoes.validacoes import validar_inteiro_no_intervalo
 
@@ -123,3 +125,16 @@ def enviar_resposta_mes_mais_chuvoso(mes_ano_legivel):
     return print(
         f"O mes mais chuvoso  de todos os tempos for o mes {mes_ano_legivel["mes"]} do ano de {mes_ano_legivel["ano"]}"
     )
+
+def apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze) -> list:
+    dict_medias = {}
+    for x in achar_media_temp_minima_ano(lista_com_mes_ano, ultimos_onze):
+        dict_medias.update(
+            {
+                str(x.get("data")): float(
+                    sum(x.get("valores")) / len(x.get("valores"))
+                ),
+            }
+        )
+
+    return dict_medias

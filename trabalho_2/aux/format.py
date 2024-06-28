@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def preenchimento(campo, valor):
     n_campo = len(campo)
     n_valor = len(valor)
@@ -112,3 +115,22 @@ def formatar_data_pre_apresentacao(range_filtrado_por_data_e_tipo):
         lista.append(dia)
 
     return lista
+
+
+def converter(data: datetime) -> str:
+    """Recebe um objeto datatime e devolve um string
+    contendo o respectivo padrao mes_ano, por exemplo:
+    -->  2_2022
+    """
+
+    mes = data.get("data").month
+    ano = data.get("data").year
+
+    return str(mes) + "_" + str(ano)
+
+
+def popular_dict_apresentacao(lista_apresentacao_dados_media_minima: list) -> dict:
+    for x in lista_apresentacao_dados_media_minima:
+        dict_apresentacao = {str(x.get("data")): x.get("media")}
+        dict_apresentacao.update(x)
+    return dict_apresentacao
