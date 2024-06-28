@@ -1,5 +1,5 @@
 import pprint
-from .testes import grafico_barra
+from testes import grafico_barra
 from datetime import datetime
 from aux.load import carregar_csv
 from aux.filters import (
@@ -86,23 +86,42 @@ if __name__ == "__main__":
         return lista
 
     def apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze) -> list:
-        lista_medias = []
+        dict_medias = {}
         for x in achar_media_temp_minima_ano(lista_com_mes_ano, ultimos_onze):
-            dict_medias = {
-                "data": x.get("data"),
-                "len": len(x.get("valores")),
-                "soma": sum(x.get("valores")),
-                "media": float(sum(x.get("valores")) / len(x.get("valores"))),
-            }
+            dict_medias.update(
+                {
+                    str(x.get("data")): float(
+                        sum(x.get("valores")) / len(x.get("valores"))
+                    ),
+                }
+            )
 
-            lista_medias.append(dict_medias)
+        return dict_medias
 
-        return lista_medias
+    def popular_dict_apresentacao(lista_apresentacao_dados_media_minima: list) -> dict:
+        for x in lista_apresentacao_dados_media_minima:
+            dict_apresentacao = {str(x.get("data")): x.get("media")}
+            dict_apresentacao.update(x)
+        return dict_apresentacao
+
+    def media_das_medias_minimas(apresentacao_dados_media_minima):
+        import pdb
+
+        # pdb.set_trace()
+        soma_temp = []
+        for x, y in apresentacao_dados_media_minima.items():
+            soma_temp.append(y)
+        return sum(soma_temp) / len(soma_temp)
 
 
-pprint.pprint(apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze))
-
-
-""" Criar uma apresentacao correta com os dados do topico C.
-    Criar um grafico que entregue dos dados conforme o enunciado.
-"""
+dict_apresentacao = apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze)
+grafico_barra(
+    dict_apresentacao,
+    "temp media minima por mes e ano",
+    "mes_ano",
+    "Valor em Graus Celsus",
+)
+print(
+    "A media das temperaturas minimas medias dos ultimos 11 anos, para o mes escolhido pelo usuario, foi ->",
+    media_das_medias_minimas(dict_apresentacao),
+)
