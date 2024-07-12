@@ -2,3 +2,4 @@ black
 ipython
 python-dateutil
 rich
+pylint
