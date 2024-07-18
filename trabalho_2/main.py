@@ -1,8 +1,11 @@
-import pprint
-from testes import grafico_barra
-from datetime import datetime
-from aux.load import carregar_csv
-from aux.filters import (
+#!/usr/bin/env python3 
+
+from settings import PATH_FILE
+
+from app.aux.graficos import grafico_barra
+from app.aux.load import carregar_csv
+
+from app.aux.filters import (
     filtrar_range_data,
     filtrar_range_tipo,
     filtrar_base_chuvoso,
@@ -10,7 +13,8 @@ from aux.filters import (
     filtrar_ultimos_onze_ano,
     filtrar_ultimos_onze_anos_mes,
 )
-from aux.format import (
+
+from app.aux.format import (
     formatar_data_pre_apresentacao,
     apresentacar_data_filtrados_data_tipo,
     criar_lista_mes_ano,
@@ -18,12 +22,14 @@ from aux.format import (
     converter,
     popular_dict_apresentacao,
 )
-from aux.calc import (
+
+from app.aux.calc import (
     somar_chuva_mes_ano,
     achar_media_temp_minima_ano,
     media_das_medias_minimas,
 )
-from inputs.inputs import (
+
+from app.inputs.inputs import (
     procurar_data_inicial,
     procurar_data_final,
     apresentacao_dados,
@@ -32,11 +38,10 @@ from inputs.inputs import (
     apresentacao_dados_media_minima,
 )
 
-path = "Anexo_Arquivo_Dados_Projeto_Logica_e_programacao_de_computadores.csv"
 
 if __name__ == "__main__":
 
-    base = carregar_csv(path=path)
+    base = carregar_csv(path=PATH_FILE)
     di = procurar_data_inicial()
     df = procurar_data_final(di)
     range_filtrado_por_data = filtrar_range_data(di, df, base)
