@@ -1,14 +1,14 @@
+"""Main aux calculation"""
+
 from app.aux.format import (
     criar_lista_mes_ano,
     format_mes_ano,
-    converter_mes_legivel,
     converter,
 )
 
 
 def soma_mes(mes_ano, cmc, key: str):
-    # Funciona liso
-    import pdb
+    """Realiza a soma de um periodo especifico"""
 
     acumulado = []
     for x in cmc:
@@ -18,8 +18,9 @@ def soma_mes(mes_ano, cmc, key: str):
 
 
 def somar_chuva_mes_ano(cmc):
-    # retorna uma lista com todos os mes_ano e
-    # a respectiva somatoria de chuva no mes.
+    """retorna uma lista com todos os mes/ano
+    e sua respectiva somatoria de chuva acumulada"""
+
     lista_mes_ano = criar_lista_mes_ano(cmc)
     lista_acumulado = []
     for x in lista_mes_ano:
@@ -30,6 +31,8 @@ def somar_chuva_mes_ano(cmc):
 
 
 def achar_media_temp_minima_ano(lista_com_mes_ano, ultimos_onze):
+    """Encontra a temperatura media minima do ano"""
+
     lista = []
     for x in lista_com_mes_ano:
         lista_valores = []
@@ -37,8 +40,6 @@ def achar_media_temp_minima_ano(lista_com_mes_ano, ultimos_onze):
             valor = converter(y)
             if x == valor:
                 lista_valores.append(float(y.get("minima")))
-                # lista.append(float(y.get("minima")))
-                # dict_mes = {"data": mes_ano, "valor": float(y.get("minima"))}
         mes_ano = {"data": x, "valores": lista_valores}
         lista.append(mes_ano)
 
@@ -46,9 +47,8 @@ def achar_media_temp_minima_ano(lista_com_mes_ano, ultimos_onze):
 
 
 def media_das_medias_minimas(apresentacao_dados_media_minima):
-    import pdb
+    """Calcula a medias das temperaturas minimas"""
 
-    # pdb.set_trace()
     soma_temp = []
     for x, y in apresentacao_dados_media_minima.items():
         soma_temp.append(y)

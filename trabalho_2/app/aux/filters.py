@@ -1,15 +1,12 @@
-from datetime import *
+"""General aux filters"""
+
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-""" 
-(X) c) Média da temperatura mínima de um determinado mês (auge do inverno) nos últimos 11 anos (2006 a 2016): 
-    Meus comentarios.
-    sic - Qual a temperatura media de 'agosto' dos ultimos 11 anos.....por exemplo.
-"""
 
+def filtrar_base_temp_minima(base: list[dict]) -> list[dict]:
+    """Cria uma lista contendo a temp minima do dia"""
 
-def filtrar_base_temp_minima(base):
-    # criar uma lista contendo a temp_media
     lista = []
     for x in base:
         dia = {
@@ -26,11 +23,9 @@ def filtrar_ultimos_onze_ano(base_minima):
     desta forma, nao posso realizar o calculo de forma dinamica.
     2006 a 2016.
     """
+
     lista = []
-    data_atual = datetime.now()
-    data_anterior = data_atual - relativedelta(years=11)
     for x in base_minima:
-        # if x.get("data").year >= data_anterior.year:
         if int(x.get("data").year) >= 2006 and int(x.get("data").year) <= 2016:
             lista.append(x)
     return lista
@@ -40,9 +35,6 @@ def filtrar_ultimos_onze_anos_mes(base_filtrada: list, mes_informado: int) -> li
     """Pega a base convertida contendo os ultimos 11 anos e separa somente\n
     o mes informado pelo usuario por todo periodo abrangido
     """
-    import pdb
-
-    # pdb.set_trace()
     lista = []
     for x in base_filtrada:
         if int(x.get("data").month) == int(mes_informado):
@@ -50,9 +42,8 @@ def filtrar_ultimos_onze_anos_mes(base_filtrada: list, mes_informado: int) -> li
     return lista
 
 
-# Funciona liso
 def filtrar_base_chuvoso(base):
-    # criar uma lista contendo o total de chuva por mes
+    """criar uma lista contendo o total de chuva por mes"""
     lista = []
     for x in base:
         dia = {
@@ -64,9 +55,8 @@ def filtrar_base_chuvoso(base):
     return lista
 
 
-# Funciona liso
 def filtrar_base_um_relativa_vel_vento(base):
-    # criar uma lista contendo o total de chuva por mes
+    """criar uma lista contendo o total de chuva por mes"""
     lista = []
     for x in base:
         dia = {
@@ -80,7 +70,7 @@ def filtrar_base_um_relativa_vel_vento(base):
 
 
 def filtrar_base_temp_media(base):
-    # criar uma lista contendo a temp_media
+    """criar uma lista contendo a temp_media"""
     lista = []
     for x in base:
         dia = {
@@ -93,7 +83,7 @@ def filtrar_base_temp_media(base):
 
 
 def filtrar_range_data(data_inicial, data_final, base):
-    # criar uma lista contendo a temp_media
+    """criar uma lista contendo a temp_media"""
     lista = []
     for x in base:
         if x["data"] >= data_inicial and x["data"] <= data_final:
@@ -114,10 +104,10 @@ def filtrar_range_data(data_inicial, data_final, base):
 
 
 def filtrar_range_tipo(tipo_de_busca, base_filtrada_por_data):
+    """filtra por tipo de range"""
 
     lista = []
     tipo = converter_tipo_de_busca(tipo_de_busca=tipo_de_busca)
-    import pdb
 
     for x in base_filtrada_por_data:
         if tipo_de_busca == "4":
@@ -150,6 +140,7 @@ def filtrar_range_tipo(tipo_de_busca, base_filtrada_por_data):
 
 
 def converter_tipo_de_busca(tipo_de_busca):
+    """Converte as colunas para um nome legivel"""
     if tipo_de_busca == "2":
         # precipitaca
         return "precip"
