@@ -96,7 +96,6 @@ def criar_lista_mes_ano(lista):
 
 
 def formatar_data_pre_apresentacao(range_filtrado_por_data_e_tipo):
-    import pdb
 
     # o range esta vindo correto
     lista = []

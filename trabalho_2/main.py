@@ -5,6 +5,7 @@ from settings import PATH_FILE
 from app.aux.graficos import Chart
 from app.aux.load import Relatorio
 
+#Criar uma classe ou um metodo de classe
 from app.aux.filters import (
     filtrar_range_data,
     filtrar_range_tipo,
@@ -14,6 +15,7 @@ from app.aux.filters import (
     filtrar_ultimos_onze_anos_mes,
 )
 
+#Criar uma classe ou um metodo de classe
 from app.aux.format import (
     formatar_data_pre_apresentacao,
     apresentacar_data_filtrados_data_tipo,
@@ -21,18 +23,14 @@ from app.aux.format import (
     converter_mes_legivel,
 )
 
+#Criar uma classe ou um metodo de classe
 from app.aux.calc import (
     somar_chuva_mes_ano,
     media_das_medias_minimas,
 )
 
 from app.inputs.inputs import (
-    procurar_data_inicial,
-    procurar_data_final,
-    apresentacao_dados,
-    escolher_mes,
-    enviar_resposta_mes_mais_chuvoso,
-    apresentacao_dados_media_minima,
+    Perguntas
 )
 
 
@@ -40,10 +38,13 @@ def run():
     """just start application"""
 
     base = Relatorio(file_path=PATH_FILE)
-    di = procurar_data_inicial()
-    df = procurar_data_final(di)
+
+    #di = Procurar.procurar_data_inicial()
+    perguntas = Perguntas()
+    di = perguntas.procurar_data_inicial
+    df = perguntas.procurar_data_final(di)
     range_filtrado_por_data = filtrar_range_data(di, df, base.carregar_csv)
-    ad = apresentacao_dados()
+    ad = perguntas.apresentacao_dados()
     range_filtrado_por_data_e_tipo = filtrar_range_tipo(
         tipo_de_busca=ad, base_filtrada_por_data=range_filtrado_por_data
     )
@@ -55,15 +56,15 @@ def run():
     cmc = filtrar_base_chuvoso(base.carregar_csv)
     resposta = max(somar_chuva_mes_ano(cmc), key=lambda x: x[1])
     mes_ano_legivel = converter_mes_legivel(resposta=resposta)
-    enviar_resposta_mes_mais_chuvoso(mes_ano_legivel)
+    perguntas.enviar_resposta_mes_mais_chuvoso(mes_ano_legivel)
     base_minima = filtrar_base_temp_minima(base.carregar_csv)
     base_minima_onze = filtrar_ultimos_onze_ano(base_minima)
-    mes_informado = escolher_mes()
+    mes_informado = perguntas.escolher_mes()
     ultimos_onze = filtrar_ultimos_onze_anos_mes(
         base_minima_onze, mes_informado=mes_informado
     )
     lista_com_mes_ano = criar_lista_mes_ano(ultimos_onze)
-    dict_apresentacao = apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze)
+    dict_apresentacao = perguntas.apresentacao_dados_media_minima(lista_com_mes_ano, ultimos_onze)
 
     grafico_barra = Chart(dict_apresentacao,
         "temp media minima por mes e ano",

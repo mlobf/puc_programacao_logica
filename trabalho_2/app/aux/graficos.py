@@ -2,10 +2,10 @@ from rich.console import Console
 from rich.table import Table
 
 
-
-
 class Chart:
     """Simple abstration for terminal charts"""
+
+    console = Console()
 
     def __init__(
         self,
@@ -21,19 +21,13 @@ class Chart:
         self.nome_segunda_coluna = nome_segunda_coluna
 
     @property
-    def console(self):
-        """Property Console"""
-        console = Console()
-        return  console
-
-    @property
     def show_bar_chart(self):
         """Show bar chart at terminal"""
         # Cria uma tabela para exibir o gráfico de barras
         table = Table(title=self.nome_do_grafico)
         # Adiciona colunas para a tabela
         table.add_column(
-        self.nome_primeira_coluna, justify="right", style="cyan", no_wrap=True
+            self.nome_primeira_coluna, justify="right", style="cyan", no_wrap=True
         )
         table.add_column(self.nome_segunda_coluna, justify="right", style="magenta")
         table.add_column("Gráfico", style="green")
@@ -43,7 +37,3 @@ class Chart:
             table.add_row(month, str(value), barra)
 
         self.console.print(table)
-
-
-
-
