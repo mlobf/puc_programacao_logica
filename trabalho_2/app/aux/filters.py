@@ -15,7 +15,7 @@ def filtrar_base_temp_minima(base: list[dict]) -> list[dict]:
     return lista
 
 
-def filtrar_ultimos_onze_ano(base_minima:dict)->list[dict]:
+def filtrar_ultimos_onze_ano(base_minima: dict) -> list[dict]:
     """Estou alterando pois a base de dados nao possui registros atuais \n
     desta forma, nao posso realizar o calculo de forma dinamica.
     2006 a 2016.

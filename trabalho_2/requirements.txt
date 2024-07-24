@@ -3,3 +3,4 @@ ipython
 python-dateutil
 rich
 pylint
+pytest
