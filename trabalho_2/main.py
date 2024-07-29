@@ -4,6 +4,7 @@ from settings import PATH_FILE
 
 from app.aux.graficos import Chart
 from app.aux.load import Relatorio
+from app.aux.aux_decorators import get_time
 
 #Criar uma classe ou um metodo de classe
 from app.aux.filters import (
@@ -33,7 +34,7 @@ from app.inputs.inputs import (
     Perguntas
 )
 
-
+@get_time
 def run():
     """just start application"""
 

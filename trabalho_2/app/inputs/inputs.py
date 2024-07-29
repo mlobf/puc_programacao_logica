@@ -122,8 +122,8 @@ class Perguntas:
                 print("")
                 print("Informe a data final da sua procura")
                 print("")
-                mes = self.informar_mes()
-                ano = self.informar_ano()
+                mes = self.informar_mes
+                ano = self.informar_ano
                 data = datetime(int(ano), int(mes), 1)
                 data_final = data
                 if data_final > data_inicial:

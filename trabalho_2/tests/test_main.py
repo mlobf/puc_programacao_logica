@@ -32,8 +32,8 @@ def test_sort_numbers(sample_numbers_unsorted):
 def test_reverse_numbers(sample_numbers_unsorted):
     actual = reverse_numbers(sample_numbers_unsorted)
     expected = [0, 1, 2, 3, -1]
-    print('actual -> ',actual)
-    print('expected -> ',expected)
+    print("actual -> ", actual)
+    print("expected -> ", expected)
     assert actual == expected
 
 
